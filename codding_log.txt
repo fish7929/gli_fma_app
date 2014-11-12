@@ -1,0 +1,21 @@
+日期：2014/11/11---2014/11/12
+1、 添加了save.css文件，
+	该文件主要是编写是否启用或者禁用推荐的style
+2、修改fma_ui_save.html
+	注释掉原先的<button>标签，在该标签下添加如下代码
+	<!--
+			<button>
+			</button>
+	-->	
+	<!---修改编辑推荐部分---->	
+	<div id="switch_div">
+		<span id="switch_txt">禁止编辑推荐</span>
+		<div class="yj_switch">
+		  <input type="checkbox" id="yj_control" class="yj_control">
+		  <label for="control" class="yj_checkbox"></label>
+		</div>
+	</div>
+3、修改base.css文件，
+	主要引入添加的save.css文件，
+	
+
