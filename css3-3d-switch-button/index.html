@@ -6,19 +6,18 @@
   <meta charset="UTF-8">
 
   <title>纯CSS3 3D开关按钮 可左右滑动DEMO演示</title>
+  <link rel="stylesheet" href="jquery-ui.css">
   <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+    <style>
 
+        .my_dialog .ui-dialog-titlebar-close{
+            display: none;
+        }
+    </style>
+  <script src="jquery.js"></script>
+  <script src="jquery-ui.js"></script>
+  <script src="./index.js" type="text/javascript"> </script>
 </head>
-
-<body>
-<div id="switch_div">
-	<span id="switch_txt">禁止编辑推荐</span>
-	<div class="yj_switch">
-	  <input type="checkbox" id="yj_control" class="yj_control">
-	  <label for="control" class="yj_checkbox"></label>
-	</div>
-</div>
-
-</body>
+<input   type=button   onClick="opendialog('测试标题','kaiguan.png','自定义对话框','backimg','kaiguan.png','kaiguan.png');"   value="Press   Here" id="ask" />
 
 </html>

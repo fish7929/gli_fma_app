@@ -48,10 +48,10 @@ define(function(){
                 url : "images/watermark/stamp/9.png"
             }
         ],
-		"shape" : [ //形状
-		   {
-			   url : "images/skin3/pic_frame_list.png"
-		   }
+			"shape" : [ //形状
+           {
+               url : "images/skin3/pic_frame_list.png"
+           }
         ]
     };
 
