@@ -49,3 +49,55 @@
 .photo_select_ul li:nth-child(3){
     background: url("../images/skin3/make/photo/photo_cancel.png") no-repeat center;
 }
+
+
+
+/***图形签章长按菜单栏***/
+#shape_hold{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+/*    background: rgba(57,203,215,0.9);
+    text-align: center;
+    margin: 0 auto;*/
+    display: -webkit-box;
+    -webkit-box-align:center;
+}
+
+.show_shape_hold{
+	bottom: 0;
+    display: block;
+}
+
+.hide_shape_hold{
+    bottom: -100%;
+    display: none;
+}
+
+.shape_hold_ul li{
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+    opacity: 0;
+}
+
+.shape_hold_ul{
+    width: 40px;
+    display: block;
+    text-align: center;
+	position: absolute;
+	left: 30px;
+	bottom: 200px;
+	z-index: 1009;
+}
+
+.shape_hold_ul li:nth-child(1){
+    background: url("../images/skin3/make/photo/up.png") no-repeat center;
+}
+
+.shape_hold_ul li:nth-child(2){
+    background: url("../images/skin3/make/photo/down.png") no-repeat center;
+}

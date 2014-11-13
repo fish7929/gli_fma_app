@@ -19,7 +19,7 @@
 	主要引入添加的save.css文件，
 	
 
-日期：2014/11/12 下午 
+日期：2014/11/12 下午 - 2014/11/13上午 
 制定对话框
 
 
@@ -33,7 +33,89 @@
         ]
 
 2、动态加载形状水印中的数据，修改watermark.js文件
+	添加一个选中形状触发的事件
+	else if (key == "shape"){ //添加形状菜单选中的触发事件
+         g_variable.watermark_html = html;
+         g_variable.watermark_original_length = us.length;
 
-3、添加shape_list.js文件，加载动态添加数据
-	
+         g_ResListClass.load_shape_list();
+     }
 
+3、修改res_list.js文件
+	添加一个加载形状的方法如下
+	// 加载形状
+	ResListClass.prototype.load_shape_list = function()
+	{
+		fmacloud.query_res(
+			"resobj", "type:3", null,true,0,1000,
+			on_query_watermark,
+			function(err){
+				alert("形状查询失败："+err);
+			}
+			);
+	}
+
+4、 修改watermark.js文件，点击图形菜单，第一个图标显示所有图形
+	代码和思路如下
+	//var title = this.key==="signature"?"签章":this.key==="stamp"?"贴纸":'';
+
+	//思路从watermark_config文件中读取标签名称，根据keys数组获取this.key对应的index
+	//从WaterMarkConfig.labels中根据得到的index获取对应的标签
+	var title = "";
+	$.each(WaterMarkConfig.keys, function(key, val){
+		if(watermark_key == val){
+			 title = WaterMarkConfig.labels[key];
+		}
+	});
+
+5、添加所有shape到第一个图片中
+	//this.key==="signature"?g_SignatureListClass.list_watermark():this.key==="stamp"?g_ResListClass.list_watermark():'';
+
+	switch(this.key){
+		case "signature":
+			g_SignatureListClass.list_watermark();
+			break;
+		case "stamp" :
+			g_ResListClass.list_watermark();
+			break;
+		case "shape" :
+			g_ResListClass.list_watermark();
+			break;
+		default: 
+			'';
+	}
+
+
+
+日期：2014/11/13 下午 
+
+添加长按shape形状出现，上一层和下一层菜单。
+1、先修改fma_a_make.js文件中的onTaphold
+2、显示菜单：添加一个显示菜单的fma_ui_shapemark.html静态页面
+3、相应静态页面点击的触发事件。
+4、查找相应触发的元素，在displayobject_manager.js文件中
+5、修改photo_select.js文件，添加shape长按菜单
+//添加"text!templates/make/fma_ui_shapemarktaphold.html",
+和对应的参数
+define([
+    "jquery",
+    "underscore", 
+    "text!templates/make/fma_ui_photoselect.html",
+    "text!templates/make/fma_ui_shapemarktaphold.html",
+    "common/render/include",
+    "tmp/base64"
+],function($, _, photoSelectTpl, shapeTapHoldTpl, createjs,base64) {
+
+/***
+*新添加的长按shape水印的时候显示上移一层和下移一层
+*/
+
+this.shapetaphold = _.template(shapeTapHoldTpl);
+this.$shapeEl = $("<div>").attr("id","shape_hold");
+this.$shapeEl.addClass("hide_shape_hold");
+this.shapeEl = this.$shapeEl.get(0);
+
+this.$shapeEl.html(this.shapetaphold);
+
+
+修改poto_select.js  poto_select.css fma_a_make.js

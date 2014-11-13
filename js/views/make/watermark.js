@@ -124,7 +124,7 @@ define([
          var params = div.attr("params");
          var displayObjects = DisplayObjectManager.displayObjects;
          var obj;
-
+		var watermark_key = this.key;
          var type2 = undefined;
          if (params) {
             type2 = "signature";
@@ -132,12 +132,40 @@ define([
 		 if(div.attr("imgurl").indexOf("pic_frame_list.png")>-1){
                     //显示list div
                     $("#pic_list_div").show();
-                    var title = this.key==="signature"?"签章":this.key==="stamp"?"贴纸":'';
+
+                    //var title = this.key==="signature"?"签章":this.key==="stamp"?"贴纸":'';
+
+					//思路从watermark_config文件中读取标签名称，根据keys数组获取this.key对应的index
+					//从WaterMarkConfig.labels中根据得到的index获取对应的标签
+					var title = "";
+					$.each(WaterMarkConfig.keys, function(key, val){
+						if(watermark_key == val){
+							 title = WaterMarkConfig.labels[key];
+						}
+					});
+
                     $("#pic_list_div header span").html("选择"+title);
                     $("#makeheader").addClass("filter40");
                     $("#makesection").addClass("filter40");
                     $("#watermark").addClass("filter40");
-                    this.key==="signature"?g_SignatureListClass.list_watermark():this.key==="stamp"?g_ResListClass.list_watermark():'';
+
+
+                    //this.key==="signature"?g_SignatureListClass.list_watermark():this.key==="stamp"?g_ResListClass.list_watermark():'';
+
+					switch(this.key){
+						case "signature":
+							g_SignatureListClass.list_watermark();
+							break;
+						case "stamp" :
+							g_ResListClass.list_watermark();
+							break;
+						case "shape" :
+							g_ResListClass.list_watermark();
+							break;
+						default: 
+							'';
+					}
+                    //this.key==="signature"?g_SignatureListClass.list_watermark():this.key==="stamp"?g_ResListClass.list_watermark():this.key==="shape"?g_ResListClass.list_watermark():'';
 
                     $("#pic_list_div>section>div>div").unbind("click").on("click",function(e){
                         params = $(this).attr("params");
@@ -309,7 +337,7 @@ else
          g_variable.watermark_original_length = us.length;
 
          g_ResListClass.load_watermark_list();
-     }else if (key == "shape"){
+     }else if (key == "shape"){ //添加形状菜单选中的触发事件
          g_variable.watermark_html = html;
          g_variable.watermark_original_length = us.length;
 

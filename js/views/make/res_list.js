@@ -130,7 +130,7 @@
 		$("#pic_list_div>section").html(html);
 	}
 
-	// 加载水印
+	// 加载印花
 	ResListClass.prototype.load_watermark_list = function()
 	{
 		fmacloud.query_res(
@@ -138,6 +138,18 @@
 			on_query_watermark,
 			function(err){
 				alert("印花查询失败："+err);
+			}
+			);
+	}
+
+	// 加载形状
+	ResListClass.prototype.load_shape_list = function()
+	{
+		fmacloud.query_res(
+			"resobj", "type:3", null,true,0,1000,
+			on_query_watermark,
+			function(err){
+				alert("形状查询失败："+err);
 			}
 			);
 	}

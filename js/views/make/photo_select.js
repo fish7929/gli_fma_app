@@ -6,20 +6,37 @@
 define([
     "jquery",
     "underscore",
-    "text!templates/make/fma_ui_photoselect.html",
+    //"text!templates/make/fma_ui_photoselect.html",
+    "text!templates/make/fma_ui_shapemarktaphold.html",
     "common/render/include",
     "tmp/base64"
-],function($, _, photoSelectTpl,createjs,base64) {
+],function($, _, photoSelectTpl,  createjs,base64) {
 
     /**
      * 相机选择页面
      */
     var PhoteSelect = function (parent) {
+		/*
         this.template = _.template(photoSelectTpl);
         this.$el = $("<div>").attr("id","photo_select");
         this.$el.addClass("hide_photo_select");
         this.el = this.$el.get(0);
-
+		*/
+		/***
+		*新添加的长按shape水印的时候显示上移一层和下移一层
+		*/
+		/*
+		this.shapetaphold = _.template(shapeTapHoldTpl);
+		this.$shapeEl = $("<div>").attr("id","shape_hold");
+		this.$shapeEl.addClass("hide_shape_hold");
+        this.shapeEl = this.$shapeEl.get(0);
+		
+		this.$shapeEl.html(this.shapetaphold);
+		*/
+		this.template = _.template(photoSelectTpl);
+		this.$el = $("<div>").attr("id","shape_hold");
+		this.$el.addClass("hide_shape_hold");
+        this.el = this.$el.get(0);
         /**
          * 相机或相册选择完后的回调函数
          * @type {null}
@@ -35,6 +52,12 @@ define([
             self.photoUL.click(function(e){
                 photoUlClick.call(self,e);
             });
+			/*
+            self.shapeUL = self.$shapeEl.find("ul:first");
+            self.shapeUL.click(function(e){
+                photoUlClick.call(self,e);
+            });
+			*/
         },0);
     };
 
@@ -48,7 +71,11 @@ define([
                 this.getNativePic("photo");
             }else if(attr == "album"){//从相册
                 this.getNativePic("album");
-            }
+            }else if (attr == "up"){
+				alert("UP");
+            }else if (attr == "down"){
+				alert("down");
+			}
         }
     }
 
@@ -121,17 +148,51 @@ define([
     };
 
     PhoteSelect.prototype.show = function(callback){
+
         this.photoCallback = callback;
+		
         this.$el.addClass("show_photo_select");
         this.$el.removeClass("hide_photo_select");
         this.$el.find("li").eq(0).addClass("fadeInUp");
         animation(this.$el.find("li"),1,150,"fadeInUp");
+		
+		//this.$shapeEl.addClass("show_shape_hold");
+        //this.$shapeEl.removeClass("hide_shape_hold");
+        //this.$shapeEl.find("li").eq(0).addClass("fadeInUp");
+        //animation(this.$shapeEl.find("li"),1,150,"fadeInUp");
     };
 
     PhoteSelect.prototype.hide = function(){
+		
         this.$el.addClass("hide_photo_select");
         this.$el.removeClass("show_photo_select");
         this.$el.find("li").removeClass("fadeInUp");
+		
+		//this.$shapeEl.addClass("hide_shape_hold");
+        ///this.$shapeEl.removeClass("show_shape_hold");
+        //this.$shapeEl.find("li").removeClass("fadeInUp");
+    };
+	/**
+	*添加显示图形
+	*
+	**/
+
+    PhoteSelect.prototype.showShapeHold = function(){
+		/*
+		alert("dsadasd" + this.$shapeEl);
+        this.$shapeEl.addClass("show_shape_hold");
+        this.$shapeEl.removeClass("hide_shape_hold");
+        this.$shapeEl.find("li").eq(0).addClass("fadeInUp");
+        animation(this.$shapeEl.find("li"),1,150,"fadeInUp");
+		*/
+    };
+
+    PhoteSelect.prototype.hideShapeHold = function(){
+		/*
+        this.$shapeEl.addClass("hide_shape_hold");
+        this.$shapeEl.removeClass("show_shape_hold");
+        this.$shapeEl.find("li").removeClass("fadeInUp");
+		*/
     };
 
     return PhoteSelect;

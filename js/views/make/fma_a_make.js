@@ -538,17 +538,21 @@ define([
 
         onTaphold : function(){
             var curObj = DisplayObjectManager.currentDisplayObject;
-
+			
             if ( curObj == null ){
                 curObj = DisplayObjectManager.getObject(0);//获取背景元素
+				
                 DisplayObjectManager.setCurrentDisplayObject(curObj);
             }
-
+			//alert(curObj);
             if(curObj && curObj.type == "editbitmap"){
-
+				
                 this.photoSelect.show(function(img){
                     curObj.setImageData(img);
                 });
+				
+				//测试显示上下层菜单
+                //this.photoSelect.showShapeHold();
             }
         },
 
