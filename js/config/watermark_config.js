@@ -9,7 +9,7 @@ define(function(){
      * @type {*[]}
      */
     var frames = {
-        keys : ["signature","stamp"，"shape"],
+        keys : ["signature","stamp", "shape"],
         labels : ["签章","贴纸","形状"],
         "signature" : [ //签章
            {
@@ -49,9 +49,9 @@ define(function(){
             }
         ],
 		"shape" : [ //形状
-		   {
-			   url : "images/skin3/pic_frame_list.png"
-		   }
+           {
+               url : "images/skin3/pic_frame_list.png"
+           }
         ]
     };
 

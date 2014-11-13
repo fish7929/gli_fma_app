@@ -19,3 +19,21 @@
 	主要引入添加的save.css文件，
 	
 
+日期：2014/11/12 下午 
+制定对话框
+
+
+添加形状菜单
+1、修改文件watermark_config.js
+	添加key--shape, label--形状
+	"shape" : [ //形状
+           {
+               url : "images/skin3/pic_frame_list.png"
+           }
+        ]
+
+2、动态加载形状水印中的数据，修改watermark.js文件
+
+3、添加shape_list.js文件，加载动态添加数据
+	
+

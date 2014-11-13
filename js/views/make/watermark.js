@@ -282,6 +282,7 @@ else
     function changeWaterMark(key){
         this.key = key;
         var us = this.waterMarkConfig[key];
+		
         var html = "";
 
         for(var i = 0;i < us.length;i++){
@@ -308,6 +309,11 @@ else
          g_variable.watermark_original_length = us.length;
 
          g_ResListClass.load_watermark_list();
+     }else if (key == "shape"){
+         g_variable.watermark_html = html;
+         g_variable.watermark_original_length = us.length;
+
+         g_ResListClass.load_shape_list();
      }
 
      // this.picScrollDiv.css({width:(liWidth * (us.length)) + "px"});
